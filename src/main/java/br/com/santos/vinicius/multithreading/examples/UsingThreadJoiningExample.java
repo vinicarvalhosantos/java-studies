@@ -17,6 +17,9 @@ public class UsingThreadJoiningExample {
         }
 
         for (Thread thread : threads) {
+            /* It is possible to use thread.setDeamon(true) here as well instead of the thread.interrupt() in line 28,
+             but I wanted to show a message when the thread is interrupted by the joining limit time.
+             */
             thread.start();
         }
 
@@ -28,10 +31,13 @@ public class UsingThreadJoiningExample {
         for (int i = 0; i < inputNumbers.size(); i++) {
             FactorialThread factorialThread = threads.get(i);
             if (factorialThread.isFinished()) {
+
                 System.out.println("Factorial of " + inputNumbers.get(i) + " is " + factorialThread.getResult());
             } else if (factorialThread.isInterrupted()) {
+
                 System.out.println("Factorial of " + inputNumbers.get(i) + " was interrupted because it took more than 2 seconds to calculate!");
             } else {
+
                 System.out.println("The calculation for " + inputNumbers.get(i) + " is still in progress");
             }
         }
