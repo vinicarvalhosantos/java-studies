@@ -2,7 +2,7 @@ package br.com.santos.vinicius.multithreading.examples;
 
 import java.math.BigInteger;
 
-public class LongComputationExample {
+public class LongComputationWithThreadInterruptExample {
 
     public static void main(String[] args) {
         Thread thread = new Thread(new LongComputationTask(new BigInteger("2000000"), new BigInteger("1000000")));
