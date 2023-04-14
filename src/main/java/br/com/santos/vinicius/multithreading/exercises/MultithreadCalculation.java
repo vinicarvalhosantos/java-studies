@@ -31,12 +31,6 @@ public class MultithreadCalculation {
 
                 System.out.println("Result is " + calculatingThread.getResult());
                 result = result.add(calculatingThread.getResult());
-            } else if (calculatingThread.isInterrupted()) {
-
-                System.out.println("Was not able to get the result beacause was interrupted because it took more than 2 seconds to calculate!");
-            } else {
-
-                System.out.println("Calculation still in progress");
             }
         }
 
