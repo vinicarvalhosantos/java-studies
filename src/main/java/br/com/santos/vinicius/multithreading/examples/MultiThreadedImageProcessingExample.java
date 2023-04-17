@@ -13,6 +13,8 @@ public class MultiThreadedImageProcessingExample {
     public static final String SOURCE_FILE = FileUtil.getMainFolderWithPath("resources/many-flowers.jpg");
     public static final String DESTINATION_FILE = FileUtil.getRootFolderWithPath("out/multi-thread/many-flowers.jpg");
 
+    public static final boolean shouldSeeImageCutted = false;
+
     public static void main(String[] args) throws IOException {
         System.out.println("Starting recoloring.");
         BufferedImage originalImage = ImageIO.read(new File(SOURCE_FILE));
@@ -21,7 +23,7 @@ public class MultiThreadedImageProcessingExample {
         long startTime = System.currentTimeMillis();
 
         //recolorSingleThreaded(originalImage, resultImage);
-        int numberOfThreads = 2;
+        int numberOfThreads = 8;
         recolorMultithreaded(originalImage, resultImage, numberOfThreads);
 
         long endTime = System.currentTimeMillis();
@@ -40,6 +42,10 @@ public class MultiThreadedImageProcessingExample {
         int height = originalImage.getHeight() / numberOfThreads;
 
         for (int i = 0; i < numberOfThreads; i++) {
+            if (shouldSeeImageCutted && i % 2 != 0) {
+                continue;
+            }
+
             final int threadMultiplier = i;
 
             Thread thread = new Thread(() -> {
